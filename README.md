@@ -1,184 +1,184 @@
 # Boilerplate Hono + React
 
 [![Template](https://img.shields.io/badge/GitHub-Template-181717?logo=github&logoColor=white)](https://github.com/juniorafpy/boilerplate-hono-react/generate)
-[![TypeScript estricto](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Strict TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Hono](https://img.shields.io/badge/Hono-4-EE7D23?logo=hono&logoColor=white)](https://hono.dev/)
 [![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-PostgreSQL-C5F74F?logo=drizzle&logoColor=black)](https://orm.drizzle.team/)
 [![Better Auth](https://img.shields.io/badge/Better_Auth-1.7-5B5BD6)](https://www.better-auth.com/)
 [![React + Vite](https://img.shields.io/badge/React_19-Vite-61DAFB?logo=react&logoColor=black&logo=react)](https://vite.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-Plantilla fullstack en TypeScript estricto lista para clonar y arrancar: **Hono + Drizzle + Better Auth** en el backend, **React + Vite + TanStack Query** en el frontend, con reglas de IA integradas (`AGENTS.md`).
+Fullstack template in strict TypeScript, ready to clone and run: **Hono + Drizzle + Better Auth** on the backend, **React + Vite + TanStack Query** on the frontend, with AI rules built in (`AGENTS.md`).
 
-> **Uso como plantilla:** [Use this template](https://github.com/juniorafpy/boilerplate-hono-react/generate) en GitHub, o clona y borra el `.git`.
+> **Use as template:** [Use this template](https://github.com/juniorafpy/boilerplate-hono-react/generate) on GitHub, or clone it and delete the `.git` folder.
 
 ---
 
 ## 1. Stack
 
-| Capa | Tecnología |
+| Layer | Technology |
 |---|---|
-| Servidor | Hono (TypeScript, `@hono/node-server`) |
-| Base de datos | PostgreSQL 17 |
-| ORM / migraciones | Drizzle ORM + drizzle-kit (columnas en **snake_case**) |
-| Autenticación | Better Auth (email/password, sesiones en BD) |
+| Server | Hono (TypeScript, `@hono/node-server`) |
+| Database | PostgreSQL 17 |
+| ORM / migrations | Drizzle ORM + drizzle-kit (**snake_case** columns) |
+| Authentication | Better Auth (email/password, DB-backed sessions) |
 | Frontend | React 19 + Vite (TypeScript) |
-| Server state | TanStack Query (caché, mutaciones, invalidación) |
-| Estado global | Zustand (solo UI/local) |
-| Formularios | React Hook Form + Zod (`@hookform/resolvers`) |
-| Validación backend | Zod + `@hono/zod-validator` |
-| Estilos | Tailwind CSS 4 (plugin `@tailwindcss/vite`) |
+| Server state | TanStack Query (cache, mutations, invalidation) |
+| Global state | Zustand (UI/local state only) |
+| Forms | React Hook Form + Zod (`@hookform/resolvers`) |
+| Backend validation | Zod + `@hono/zod-validator` |
+| Styling | Tailwind CSS 4 (via `@tailwindcss/vite` plugin) |
 | Tooling | TypeScript 7, tsx (watch), concurrently |
 
 ---
 
-## 2. Requisitos previos
+## 2. Prerequisites
 
 - **Node.js** ≥ 20
-- **PostgreSQL** ≥ 16 corriendo en `localhost:5432`
-- (Opcional) `gh` CLI para publicar en GitHub
+- **PostgreSQL** ≥ 16 running on `localhost:5432`
+- (Optional) `gh` CLI to publish to GitHub
 
 ---
 
-## 3. Puesta en marcha
+## 3. Getting started
 
 ```bash
-# 1. Base de datos (una sola vez)
+# 1. Database (once)
 psql -U postgres -c "CREATE DATABASE boilerplate;"
 
-# 2. Variables de entorno
-cp .env.example .env        # ajusta DATABASE_URL si es necesario
+# 2. Environment variables
+cp .env.example .env        # adjust DATABASE_URL if needed
 
-# 3. Dependencias
+# 3. Dependencies
 npm install
 
-# 4. Migraciones
-npm run db:generate         # genera el SQL desde los esquemas
-npm run db:migrate          # lo aplica a la BD
+# 4. Migrations
+npm run db:generate         # generates SQL from schemas
+npm run db:migrate          # applies it to the database
 
-# 5. Arranque (API :3000 + Vite :5173)
+# 5. Start (API :3000 + Vite :5173)
 npm run dev
 ```
 
-Abre **http://localhost:5173**. Crea una cuenta desde la UI (o con `POST /api/auth/sign-up/email`) y ya puedes crear notas.
+Open **http://localhost:5173**. Create an account from the UI (or via `POST /api/auth/sign-up/email`) and start creating notes.
 
-### Variables de entorno (`.env`)
+### Environment variables (`.env`)
 
-| Variable | Ejemplo | Descripción |
+| Variable | Example | Description |
 |---|---|---|
-| `DATABASE_URL` | `postgresql://postgres:postgres@localhost:5432/boilerplate` | Conexión Drizzle / Better Auth |
-| `PORT` | `3000` | Puerto del servidor Hono |
-| `CLIENT_ORIGIN` | `http://localhost:5173` | Origen permitido en CORS |
+| `DATABASE_URL` | `postgresql://postgres:postgres@localhost:5432/boilerplate` | Connection for Drizzle / Better Auth |
+| `PORT` | `3000` | Hono server port |
+| `CLIENT_ORIGIN` | `http://localhost:5173` | Allowed origin in CORS |
 
 ---
 
 ## 4. Scripts
 
-| Comando | Qué hace |
+| Command | What it does |
 |---|---|
-| `npm run dev` | API + cliente a la vez (concurrently) |
-| `npm run dev:server` | Solo Hono con watch (`tsx watch`) |
-| `npm run dev:client` | Solo Vite con HMR |
-| `npm run typecheck` | `tsc --noEmit` (ejecutar antes de terminar cada tarea) |
-| `npm run build` | Build de producción del cliente |
-| `npm run db:generate` | Genera migración desde `server/src/db/schema/` |
-| `npm run db:migrate` | Aplica migraciones pendientes |
-| `npm run db:studio` | Drizzle Studio (explorar/editar datos) |
+| `npm run dev` | Runs API + client together (concurrently) |
+| `npm run dev:server` | Hono only, with watch (`tsx watch`) |
+| `npm run dev:client` | Vite only, with HMR |
+| `npm run typecheck` | `tsc --noEmit` (run before finishing every task) |
+| `npm run build` | Production build of the client |
+| `npm run db:generate` | Generates a migration from `server/src/db/schema/` |
+| `npm run db:migrate` | Applies pending migrations |
+| `npm run db:studio` | Drizzle Studio (browse/edit data) |
 
 ---
 
-## 5. Estructura del proyecto
+## 5. Project structure
 
 ```
-├── AGENTS.md                    # Reglas del proyecto para cualquier IA (fuente única)
-├── CLAUDE.md                    # → apunta a AGENTS.md (Claude Code)
-├── .github/copilot-instructions.md  # → apunta a AGENTS.md (Copilot)
-├── drizzle.config.ts            # Config de migraciones
-├── vite.config.ts               # React + Tailwind + proxy /api → :3000
-├── tsconfig.json                # TypeScript estricto (server + client)
-├── index.html                   # Entry del cliente
+├── AGENTS.md                    # Project rules for any AI (single source of truth)
+├── CLAUDE.md                    # → points to AGENTS.md (Claude Code)
+├── .github/copilot-instructions.md  # → points to AGENTS.md (Copilot)
+├── drizzle.config.ts            # Migrations config
+├── vite.config.ts               # React + Tailwind + /api proxy → :3000
+├── tsconfig.json                # Strict TypeScript (server + client)
+├── index.html                   # Client entry
 │
 ├── server/src/
-│   ├── index.ts                 # Arranque (@hono/node-server)
-│   ├── app.ts                   # Composición: CORS, logger, montaje de rutas
+│   ├── index.ts                 # Boot (@hono/node-server)
+│   ├── app.ts                   # Composition: CORS, logger, route mounting
 │   ├── db/
-│   │   ├── index.ts             # Cliente Drizzle (postgres.js)
-│   │   ├── schema/              # Esquemas (snake_case) ← generar aquí
+│   │   ├── index.ts             # Drizzle client (postgres.js)
+│   │   ├── schema/              # Schemas (snake_case) ← create here
 │   │   │   ├── auth.ts          # user, session, account, verification
-│   │   │   └── notes.ts         # Ejemplo de entidad completa
-│   │   └── migrations/          # SQL generado por drizzle-kit
-│   ├── lib/auth.ts              # Instancia Better Auth + adapter Drizzle
-│   ├── middleware/auth.ts       # requireAuth (protege rutas)
-│   └── routes/                  # Endpoints modulares ← crear aquí
+│   │   │   └── notes.ts         # Complete entity example
+│   │   └── migrations/          # SQL generated by drizzle-kit
+│   ├── lib/auth.ts              # Better Auth instance + Drizzle adapter
+│   ├── middleware/auth.ts       # requireAuth (protects routes)
+│   └── routes/                  # Modular endpoints ← create here
 │       ├── auth.ts              # /api/auth/*  (Better Auth)
 │       ├── health.ts            # GET /api/health
-│       ├── notes.ts             # CRUD /api/notes (ejemplo)
+│       ├── notes.ts             # CRUD /api/notes (example)
 │       └── users.ts             # GET /api/users/me
 │
 └── client/src/
     ├── main.tsx                 # React root + QueryClientProvider
-    ├── App.tsx                  # Layout y páginas
+    ├── App.tsx                  # Layout and pages
     ├── index.css                # @import "tailwindcss"
     ├── api/
-    │   ├── client.ts            # apiFetch<T>() → /api/* con credentials
+    │   ├── client.ts            # apiFetch<T>() → /api/* with credentials
     │   └── auth-client.ts       # createAuthClient() (better-auth/react)
-    ├── hooks/                   # Server state (TanStack Query) ← crear aquí
+    ├── hooks/                   # Server state (TanStack Query) ← create here
     │   ├── use-session.ts
     │   ├── use-health.ts
-    │   └── use-notes.ts         # Ejemplo: query + mutaciones
-    ├── stores/ui-store.ts       # Zustand (solo estado de UI)
-    ├── components/              # Componentes presentacionales
-    ├── pages/                   # Páginas
-    │   ├── HomePage.tsx         # Monitor de salud de la API
-    │   └── NotesPage.tsx        # Ejemplo con RHF + Zod
-    └── types/index.ts           # Tipos compartidos (Note, ApiUser, …)
+    │   └── use-notes.ts         # Example: query + mutations
+    ├── stores/ui-store.ts       # Zustand (UI state only)
+    ├── components/              # Presentational components
+    ├── pages/                   # Pages
+    │   ├── HomePage.tsx         # API health monitor
+    │   └── NotesPage.tsx        # Example with RHF + Zod
+    └── types/index.ts           # Shared types (Note, ApiUser, …)
 ```
 
 ---
 
 ## 6. Endpoints
 
-### Públicos
+### Public
 
-| Método | Ruta | Descripción |
+| Method | Route | Description |
 |---|---|---|
-| `GET` | `/api/health` | Estado del servidor (uptime, timestamp) |
-| `POST` | `/api/auth/sign-up/email` | Registro `{email, password, name}` |
-| `POST` | `/api/auth/sign-in/email` | Login `{email, password}` → cookie de sesión |
-| `POST` | `/api/auth/sign-out` | Cierra sesión |
-| `GET` | `/api/auth/get-session` | Devuelve la sesión actual (Better Auth) |
+| `GET` | `/api/health` | Server status (uptime, timestamp) |
+| `POST` | `/api/auth/sign-up/email` | Sign up `{email, password, name}` |
+| `POST` | `/api/auth/sign-in/email` | Sign in `{email, password}` → session cookie |
+| `POST` | `/api/auth/sign-out` | Sign out |
+| `GET` | `/api/auth/get-session` | Returns the current session (Better Auth) |
 
-> Better Auth expone el resto de endpoints (reset password, OAuth, etc.) bajo `/api/auth/*`. Documentación: https://www.better-auth.com/docs
+> Better Auth exposes the rest of its endpoints (password reset, OAuth, etc.) under `/api/auth/*`. Docs: https://www.better-auth.com/docs
 
-### Protegidas (requieren cookie de sesión → `401` sin ella)
+### Protected (require a session cookie → `401` without it)
 
-| Método | Ruta | Descripción |
+| Method | Route | Description |
 |---|---|---|
-| `GET` | `/api/users/me` | Usuario de la sesión actual |
-| `GET` | `/api/notes` | Notas del usuario autenticado |
-| `POST` | `/api/notes` | Crea nota `{title, content}` → `201` |
-| `PATCH` | `/api/notes/:id` | Actualiza (parcial) → `404` si no es tuya |
-| `DELETE` | `/api/notes/:id` | Elimina → `404` si no es tuya |
+| `GET` | `/api/users/me` | Current session user |
+| `GET` | `/api/notes` | Notes of the authenticated user |
+| `POST` | `/api/notes` | Creates a note `{title, content}` → `201` |
+| `PATCH` | `/api/notes/:id` | Updates (partial) → `404` if not yours |
+| `DELETE` | `/api/notes/:id` | Deletes → `404` if not yours |
 
-Ejemplo con curl:
+curl example:
 
 ```bash
-# Login y guardar cookie
+# Login and store the cookie
 curl -c cookies.txt -X POST http://localhost:3000/api/auth/sign-in/email \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"password123"}'
 
-# Usar la cookie
+# Reuse the cookie
 curl -b cookies.txt http://localhost:3000/api/notes
 ```
 
 ---
 
-## 7. Cómo añadir una entidad nueva (patrón obligatorio)
+## 7. Adding a new entity (required pattern)
 
-Toda entidad nueva se genera **completa en el mismo cambio** (regla de `AGENTS.md`). Copia el patrón de `notes`:
+Every new entity must be generated **completely in the same change** (rule from `AGENTS.md`). Copy the `notes` pattern:
 
-**1. Esquema** — `server/src/db/schema/<entidad>.ts`
+**1. Schema** — `server/src/db/schema/<entity>.ts`
 ```ts
 export const project = pgTable("project", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -188,18 +188,18 @@ export const project = pgTable("project", {
 });
 export type Project = InferSelectModel<typeof project>;
 ```
-Y exportarlo desde `db/schema/index.ts`.
+And export it from `db/schema/index.ts`.
 
-**2. Endpoint** — `server/src/routes/<entidad>.ts`
+**2. Endpoint** — `server/src/routes/<entity>.ts`
 ```ts
 export const projectRoutes = new Hono()
-  .use(requireAuth)                       // siempre protegido
-  .get("/projects", async (c) => { /* filtra por c.var.session.user.id */ })
+  .use(requireAuth)                       // always protected
+  .get("/projects", async (c) => { /* filter by c.var.session.user.id */ })
   .post("/projects", zValidator("json", schemaZod), async (c) => { /* … */ });
 ```
-Montarlo en `server/src/app.ts` (`app.route("/api", projectRoutes)`) y en `routes/index.ts`.
+Mount it in `server/src/app.ts` (`app.route("/api", projectRoutes)`) and in `routes/index.ts`.
 
-**3. Hook** — `client/src/hooks/use-<entidad>.ts`
+**3. Hook** — `client/src/hooks/use-<entity>.ts`
 ```ts
 export function useProjects() {
   return useQuery({ queryKey: ["projects"], queryFn: () => apiFetch<{ projects: Project[] }>("/projects") });
@@ -213,56 +213,56 @@ export function useCreateProject() {
 }
 ```
 
-**4. Tipos** — añadir la interfaz en `client/src/types/index.ts`.
+**4. Types** — add the interface in `client/src/types/index.ts`.
 
-**5. Página/componente** — formulario con `useForm` + `zodResolver`, lista con el hook.
+**5. Page/component** — form with `useForm` + `zodResolver`, list with the hook.
 
-**6. Migración y validación**
+**6. Migration and validation**
 ```bash
 npm run db:generate && npm run db:migrate
 npm run typecheck
 ```
-Probar el endpoint (signup/login/CRUD) antes de dar por terminada la tarea.
+Test the endpoint (signup/login/CRUD) before considering the task done.
 
 ---
 
-## 8. Convenciones (resumen de AGENTS.md)
+## 8. Conventions (summary of AGENTS.md)
 
-- TypeScript estricto: **nada de `any`**.
-- Columnas y tablas en Drizzle: **snake_case** (`userId` → `user_id`).
-- Rutas solo en `server/src/routes/`, protegidas con `requireAuth`.
-- Server state → **TanStack Query** en `client/src/hooks/`; estado de UI → **Zustand** en `client/src/stores/`.
-- Formularios complejos → **React Hook Form + Zod**.
-- HTTP desde el cliente → siempre `apiFetch()` de `client/src/api/client.ts`.
-- Antes de terminar cada tarea: `npm run typecheck`.
+- Strict TypeScript: **no `any`**.
+- Drizzle columns and tables: **snake_case** (`userId` → `user_id`).
+- Routes only in `server/src/routes/`, protected with `requireAuth`.
+- Server state → **TanStack Query** in `client/src/hooks/`; UI state → **Zustand** in `client/src/stores/`.
+- Complex forms → **React Hook Form + Zod**.
+- HTTP from the client → always `apiFetch()` from `client/src/api/client.ts`.
+- Before finishing every task: `npm run typecheck`.
 
-Los archivos de reglas se mantienen sincronizados apuntando a `AGENTS.md`:
-`CLAUDE.md` y `.github/copilot-instructions.md` solo lo referencian — **edita siempre `AGENTS.md`**.
+The rule files stay in sync pointing to `AGENTS.md`:
+`CLAUDE.md` and `.github/copilot-instructions.md` only reference it — **always edit `AGENTS.md`**.
 
 ---
 
-## 9. Despliegue (notas)
+## 9. Deployment notes
 
-- **Cliente:** `npm run build` → estáticos en `dist/` (Nginx, Vercel, etc.). Ajusta el proxy/`apiFetch` a la URL absoluta de la API.
-- **Servidor:** `tsx server/src/index.ts` detrás de un process manager (PM2, systemd, Docker). Define `DATABASE_URL`, `PORT`, `CLIENT_ORIGIN` y `BETTER_AUTH_URL`.
-- **BD:** `npm run db:migrate` en el release; nunca tocar migraciones ya aplicadas.
+- **Client:** `npm run build` → static files in `dist/` (Nginx, Vercel, etc.). Point the proxy/`apiFetch` to the absolute API URL.
+- **Server:** `tsx server/src/index.ts` behind a process manager (PM2, systemd, Docker). Set `DATABASE_URL`, `PORT`, `CLIENT_ORIGIN` and `BETTER_AUTH_URL`.
+- **Database:** run `npm run db:migrate` on release; never edit already-applied migrations.
 
 ---
 
 ## 10. Troubleshooting
 
-| Síntoma | Solución |
+| Symptom | Solution |
 |---|---|
-| `ECONNREFUSED :5432` | PostgreSQL no corre: `Start-Service postgresql-x64-17` |
-| `password authentication failed` | Revisa `DATABASE_URL` en `.env` |
-| `401` inesperado en rutas protegidas | No hay cookie: hace login primero (`sign-in/email`) |
-| El servidor no arranca tras tocar rutas | Mira la consola de `npm run dev`; reinicia si `tsx watch` murió (p. ej. por import inexistente) |
-| `Better Auth: Base URL is not set` | Warning inocuo en dev; en producción define `BETTER_AUTH_URL` |
-| Puerto ocupado | Cambia `PORT` (API) o el puerto en `vite.config.ts` (cliente) |
-| Migración no refleja el esquema | `npm run db:generate` tras editar `db/schema/` |
+| `ECONNREFUSED :5432` | PostgreSQL is not running: `Start-Service postgresql-x64-17` |
+| `password authentication failed` | Check `DATABASE_URL` in `.env` |
+| Unexpected `401` on protected routes | No cookie: sign in first (`sign-in/email`) |
+| Server does not start after touching routes | Check the `npm run dev` console; restart if `tsx watch` died (e.g. missing import) |
+| `Better Auth: Base URL is not set` | Harmless warning in dev; set `BETTER_AUTH_URL` in production |
+| Port in use | Change `PORT` (API) or the port in `vite.config.ts` (client) |
+| Migration does not reflect the schema | Run `npm run db:generate` after editing `db/schema/` |
 
 ---
 
-## 11. Licencia
+## 11. License
 
-Distribuido bajo [MIT](./LICENSE) — úsalo libremente en tus proyectos personales o comerciales.
+Released under the [MIT License](./LICENSE) — free to use in personal or commercial projects.

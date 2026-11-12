@@ -1,34 +1,34 @@
 name: Bug report
-description: Reporta un error en el boilerplate
+description: Report a bug in the boilerplate
 labels: ["bug"]
 body:
   - type: textarea
     id: what-happened
     attributes:
-      label: ¿Qué pasó?
-      description: Describe el comportamiento esperado y el real.
+      label: What happened?
+      description: Describe the expected and the actual behavior.
     validations:
       required: true
   - type: textarea
     id: repro
     attributes:
-      label: Pasos para reproducir
+      label: Steps to reproduce
       placeholder: |
         1. `npm run dev`
-        2. Crear cuenta en la UI
-        3. Ver error en consola…
+        2. Create an account in the UI
+        3. See error in console…
     validations:
       required: true
   - type: input
     id: env
     attributes:
-      label: Entorno
-      description: SO, versión de Node y de PostgreSQL.
+      label: Environment
+      description: OS, Node version and PostgreSQL version.
       placeholder: "Windows 11 / Node 22 / PostgreSQL 17"
     validations:
       required: true
   - type: textarea
     id: logs
     attributes:
-      label: Logs o captura
+      label: Logs or screenshot
       render: shell
