@@ -1,5 +1,13 @@
 # Boilerplate Hono + React
 
+[![Template](https://img.shields.io/badge/GitHub-Template-181717?logo=github&logoColor=white)](https://github.com/juniorafpy/boilerplate-hono-react/generate)
+[![TypeScript estricto](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Hono](https://img.shields.io/badge/Hono-4-EE7D23?logo=hono&logoColor=white)](https://hono.dev/)
+[![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-PostgreSQL-C5F74F?logo=drizzle&logoColor=black)](https://orm.drizzle.team/)
+[![Better Auth](https://img.shields.io/badge/Better_Auth-1.7-5B5BD6)](https://www.better-auth.com/)
+[![React + Vite](https://img.shields.io/badge/React_19-Vite-61DAFB?logo=react&logoColor=black&logo=react)](https://vite.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 Plantilla fullstack en TypeScript estricto lista para clonar y arrancar: **Hono + Drizzle + Better Auth** en el backend, **React + Vite + TanStack Query** en el frontend, con reglas de IA integradas (`AGENTS.md`).
 
 > **Uso como plantilla:** [Use this template](https://github.com/juniorafpy/boilerplate-hono-react/generate) en GitHub, o clona y borra el `.git`.
@@ -255,6 +263,6 @@ Los archivos de reglas se mantienen sincronizados apuntando a `AGENTS.md`:
 
 ---
 
-## Licencia
+## 11. Licencia
 
-Úsalo libremente en tus proyectos.
+Distribuido bajo [MIT](./LICENSE) — úsalo libremente en tus proyectos personales o comerciales.

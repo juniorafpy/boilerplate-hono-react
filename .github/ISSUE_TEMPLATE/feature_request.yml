@@ -1,0 +1,16 @@
+name: Solicitud de mejora
+description: Propón una nueva feature o mejora para el boilerplate
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: ¿Qué te gustaría añadir?
+      description: Describe la feature y por qué encaja en el stack (Hono/Drizzle/Better Auth/React).
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Ejemplo de uso
+      placeholder: "Como usuario quiero… para que…"
