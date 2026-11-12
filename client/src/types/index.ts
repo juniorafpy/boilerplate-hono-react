@@ -4,6 +4,15 @@ export interface HealthResponse {
   uptime: number;
 }
 
+export interface Note {
+  id: string;
+  title: string;
+  content: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface ApiUser {
   id: string;
   name: string;
