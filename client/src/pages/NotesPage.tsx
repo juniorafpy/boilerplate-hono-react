@@ -13,7 +13,7 @@ type NoteForm = z.infer<typeof noteSchema>;
 
 export function NotesPage() {
   const { data: session } = useSession();
-  const { data, isLoading } = useNotes();
+  const { data, isLoading } = useNotes({ enabled: !!session });
   const createNote = useCreateNote();
   const deleteNote = useDeleteNote();
 

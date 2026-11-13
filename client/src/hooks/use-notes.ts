@@ -7,10 +7,11 @@ export interface NoteInput {
   content: string;
 }
 
-export function useNotes() {
+export function useNotes(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ["notes"],
     queryFn: () => apiFetch<{ notes: Note[] }>("/notes"),
+    enabled: options?.enabled ?? true,
   });
 }
 
